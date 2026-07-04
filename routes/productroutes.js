@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const multer = require('multer')
+const auth = require('../middleware/authmiddleware')
 const {addproduct,getall} = require('../controller/productcontroller')
 
 
@@ -22,7 +23,7 @@ const upload = multer({
 router.post('/products/add',upload.single('image'),addproduct)
 
 
-router.get('/products',getall)
+router.get('/products',auth,getall)
 
 
 module.exports = router
