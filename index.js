@@ -3,6 +3,11 @@ const app = express()
 const Product = require('./models/Product')
 const productroute = require('./routes/productroutes')
 const connectdb = require('./config/db')
+const userRoutes = require('./routes/authroute')
+
+
+app.use(express.json())
+app.use("/uploads",express.static("uploads"))
 
 
 
@@ -14,13 +19,12 @@ app.use('/v1',productroute)
 
 
 
-app.use(express.json())
-app.use("/uploads",express.static("uploads"))
-
 app.get('/',(req,res)=>{
    res.end('service is running')
 
 })
+
+app.use('/v1',userRoutes)
 
 
 
